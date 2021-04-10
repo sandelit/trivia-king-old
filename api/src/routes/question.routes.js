@@ -1,15 +1,15 @@
 const {
-    getRandomQuestion,
-    getQuestionById,
-    createQuestion,
-} = require('../controllers/question.controller')
+  getRandomQuestion,
+  getQuestionById,
+  createQuestion,
+} = require("../controllers/question.controller");
 
-const route = require('express').Router()
+const route = require("express").Router();
 
-route.get('/random', getRandomQuestion)
-route.get('/:id', getQuestionById)
-route.post('/', createQuestion)
-/* 
+route.get("/random", getRandomQuestion);
+route.get("/:id", getQuestionById);
+route.post("/", createQuestion);
+/*
 
 // GET ONE RANDOM QUESTION
 app.get('/random-question', async (req, res) => {
@@ -88,9 +88,9 @@ app.delete('/question/:id', async (req, res) => {
 */
 
 route.use((req, res, next) => {
-    const error = new Error('Only GET, POST, PUT, DELETE commands are supported')
-    error.status = 500
-    next(error)
-})
+  const error = new Error("Only GET, POST, PUT, DELETE commands are supported");
+  error.status = 500;
+  next(error);
+});
 
-module.exports = route
+module.exports = route;

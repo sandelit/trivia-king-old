@@ -3,18 +3,28 @@ const jwt = require('jsonwebtoken')
 const handleError = require('../middleware/handleError')
 const pool = require('../config/db')
 
-exports.getRandomQuestion = async (req, res, next) => {
+exports.getCurrentUser = async (req, res, next) => {
     try {
-        const randQuestion = await pool.query('SELECT * FROM questions ORDER BY RANDOM() LIMIT 1')
-        res.json(randQuestion.rows)
+        const currentUsername = req.headers.currentuser
+        const dbResponse = await pool.query('SELECT * FROM users WHERE username=$1', [
+            currentUsername,
+        ])
+        const currentUser = dbResponse.rows[0]
+
+        res.json({ currentUser: currentUser })
     } catch (e) {
         handleError(e)
     }
 }
 
-exports.getCurrentUser = async (req, res, next) => {
+exports.getAllUsers = async (req, res, next) => {
     try {
-    } catch (e) {}
+        const dbResponse = await pool.query('SELECT * FROM users')
+        const users = dbResponse.rows
+        res.status(200).json({ users: users })
+    } catch (e) {
+        handleError(e)
+    }
 }
 
 exports.loginUser = async (req, res, next) => {
@@ -28,7 +38,6 @@ exports.loginUser = async (req, res, next) => {
             email: dbResponse.rows[0].email,
             password: dbResponse.rows[0].password,
         }
-        console.log(process.env.JWT_SECRET)
         bcrypt.compare(password, user.password, (err, result) => {
             if (err) {
                 res.status(401).json({ message: 'Authentication failed' })

@@ -1,12 +1,23 @@
-const { registerUser, loginUser } = require('../controllers/user.controller')
+const {
+    registerUser,
+    loginUser,
+    getCurrentUser,
+    getAllUsers,
+} = require('../controllers/user.controller')
 
 const route = require('express').Router()
 
-//route.get('/random', getRandomQuestion)
-//route.get('/:id', getQuestionById)
-//route.post('/', createQuestion)
+//
+// Login and registration
+//
 route.post('/login', loginUser)
 route.post('/register', registerUser)
+
+//
+// Get user info
+//
+route.get('/current', getCurrentUser)
+route.get('/all', getAllUsers)
 
 route.use((req, res, next) => {
     const error = new Error('Only GET, POST, PUT, DELETE commands are supported')
