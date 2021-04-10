@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Logo from './Logo'
 
@@ -8,9 +9,15 @@ const Nav = () => {
             <h2>Trivia King</h2>
             <Logo />
             <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Leaderboards</li>
+                <Link to="/">
+                    <li>Home</li>
+                </Link>
+                <Link to="/About">
+                    <li>About</li>
+                </Link>
+                <Link to="/Login">
+                    <li>Login</li>
+                </Link>
             </ul>
         </nav>
     )
