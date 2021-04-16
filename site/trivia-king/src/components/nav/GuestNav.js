@@ -1,12 +1,10 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
+import Logo from '../Logo'
 
-import Logo from './Logo'
-
-const Nav = () => {
+const GuestNav = () => {
     return (
         <nav>
-            <h2>Trivia King</h2>
+            <h2>GUEST</h2>
             <Logo />
             <ul>
                 <Link to="/">
@@ -23,4 +21,4 @@ const Nav = () => {
     )
 }
 
-export default Nav
+export default GuestNav

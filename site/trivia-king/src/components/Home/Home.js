@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+
+import HomePage from './HomePage'
+import Play from './Play'
+
+import { UserContext } from '../context/UserContext'
 
 const Home = () => {
-    return (
-        <div>
-            <h1>HOME</h1>
-        </div>
-    )
+    const [userInfo, setUserInfo] = useContext(UserContext)
+
+    if (userInfo === undefined) {
+        return <HomePage />
+    } else {
+        return <Play />
+    }
 }
 
 export default Home
